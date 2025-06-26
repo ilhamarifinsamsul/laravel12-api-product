@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -63,5 +64,21 @@ class ProductController extends Controller
 
         // return response
         return new ProductResource(true, 'Data Product Berhasil Ditambahkan!', $product);
+    }
+
+    /**
+     * show
+     * 
+     * @param mixed $id
+     * @return void
+     */
+
+    public function show($id)
+    {
+        // find product by id
+        $product = Product::find($id);
+
+        // return single product as a resource
+        return new ProductResource(true, 'Detail Data Product!', $product);
     }
 }
